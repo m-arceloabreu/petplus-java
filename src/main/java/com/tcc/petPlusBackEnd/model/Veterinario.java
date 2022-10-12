@@ -56,6 +56,22 @@ public class Veterinario {
 	@NotNull
 	private String uf;
 	
+	public List<Clinica> getClinicaVeterinario() {
+		return clinicaVeterinario;
+	}
+
+	public void setClinicaVeterinario(List<Clinica> clinicaVeterinario) {
+		this.clinicaVeterinario = clinicaVeterinario;
+	}
+
+	public List<Servico> getServicoVeterinario() {
+		return servicoVeterinario;
+	}
+
+	public void setServicoVeterinario(List<Servico> servicoVeterinario) {
+		this.servicoVeterinario = servicoVeterinario;
+	}
+
 	@NotNull
 	private int crmv;
 	
@@ -67,13 +83,15 @@ public class Veterinario {
 	)
 	private List<Clinica> clinicaVeterinario;
 	
-	/*
-	 * @ManyToMany
-	 * 
-	 * @JoinTable( name = "Veterinario_Servico", joinColumns = @JoinColumn(name =
-	 * "idVeterinario"), inverseJoinColumns = @JoinColumn(name = "idServico") )
-	 * private List<Servico> servicoVeterinario;
-	 */
+	
+	@ManyToMany  
+	@JoinTable( 
+		name = "Veterinario_Servico", 
+		joinColumns = @JoinColumn(name ="idVeterinario"), 
+		inverseJoinColumns = @JoinColumn(name = "idServico") 
+	)
+	private List<Servico> servicoVeterinario;
+	 
 
 	public long getIdVeterinario() {
 		return idVeterinario;

@@ -7,21 +7,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 @Entity
-@Table(name="tb_clinica")
-public class Clinica {
+@Table(name = "tb_funcoinario")
+public class Funcionario {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long idClinica;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long idFuncionario;
 	
 	@NotNull
+	@Size(min = 3, max= 50)
 	private String nome;
+	
+	@NotNull
+	private String cpf;
+	
+	@NotNull
+	private String rg;
 	
 	@NotNull
 	@Email(message = "O atributo Usuario deve ser um email válido")
@@ -34,6 +44,9 @@ public class Clinica {
 	@NotNull
 	private String telefone;
 	
+	@Size(max = 5000, message = "The picture link can't be bigger than 5000 chars")
+	private String picture;
+	
 	@Column(name = "logradouro")
 	private String logradouro;
 	
@@ -45,23 +58,21 @@ public class Clinica {
 	
 	@NotNull
 	private String uf;
-	
-	
-	@ManyToMany(mappedBy = "clinicaVeterinario") 
-	private List<Veterinario> veterinario;
-	  
-	
-	@ManyToMany(mappedBy = "clinicaFuncionario") 
-	private List<Funcionario> funcionario;
-	 
-	 
+			
+	@ManyToMany		
+	@JoinTable(
+		name="Funcionario_Clinica",
+		joinColumns = @JoinColumn(name ="idFuncionario"),
+		inverseJoinColumns = @JoinColumn(name = "idClinica")
+	)
+	private List<Clinica> clinicaFuncionario;
 
-	public Long getIdClinica() {
-		return idClinica;
+	public long getIdFuncionario() {
+		return idFuncionario;
 	}
 
-	public void setIdClinica(Long idClinica) {
-		this.idClinica = idClinica;
+	public void setIdFuncionario(long idFuncionario) {
+		this.idFuncionario = idFuncionario;
 	}
 
 	public String getNome() {
@@ -70,6 +81,22 @@ public class Clinica {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
 	}
 
 	public String getEmail() {
@@ -94,6 +121,14 @@ public class Clinica {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 	public String getLogradouro() {
@@ -128,20 +163,13 @@ public class Clinica {
 		this.uf = uf;
 	}
 
-	public List<Veterinario> getVeterinario() {
-		return veterinario;
+	public List<Clinica> getClinicaFuncionario() {
+		return clinicaFuncionario;
 	}
 
-	public void setVeterinario(List<Veterinario> veterinario) {
-		this.veterinario = veterinario;
+	public void setClinicaFuncionario(List<Clinica> clinicaFuncionario) {
+		this.clinicaFuncionario = clinicaFuncionario;
 	}
-
-	public List<Funcionario> getFuncionario() {
-		return funcionario;
-	}
-
-	public void setFuncionario(List<Funcionario> funcionario) {
-		this.funcionario = funcionario;
-	}
+	
 	
 }

@@ -1,14 +1,23 @@
 package com.tcc.petPlusBackEnd.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="tb_cliente")
@@ -45,6 +54,25 @@ public class Cliente {
 	private String cidade;
 	
 	private String uf;
+	
+	@OneToMany(mappedBy = "clientePet", cascade = CascadeType.ALL)
+	private List<Pet> pet;
+	
+	@ManyToMany
+	@JoinTable(
+		name = "Cliente_Servico",
+		joinColumns = @JoinColumn(name = "idCliente"),
+		inverseJoinColumns = @JoinColumn(name = "idServico")
+	)
+	private List<Servico> servicoCliente;
+
+	public List<Servico> getServicoCliente() {
+		return servicoCliente;
+	}
+
+	public void setServicoCliente(List<Servico> servicoCliente) {
+		this.servicoCliente = servicoCliente;
+	}
 
 	public long getIdClient() {
 		return idClient;
@@ -132,6 +160,14 @@ public class Cliente {
 
 	public void setUf(String uf) {
 		this.uf = uf;
+	}
+
+	public List<Pet> getPet() {
+		return pet;
+	}
+
+	public void setPet(List<Pet> pet) {
+		this.pet = pet;
 	}
 	
 	
