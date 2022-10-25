@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.HttpStatus;
 
 import com.tcc.petPlusBackEnd.model.Servico;
 import com.tcc.petPlusBackEnd.repository.ServicoRepository;
@@ -18,10 +21,15 @@ import com.tcc.petPlusBackEnd.repository.ServicoRepository;
 public class ServicoController {
 	@Autowired
 	ServicoRepository servicoRepository;
-	
+
 	@GetMapping
-	public ResponseEntity<List<Servico>> getAll(){
+	public ResponseEntity<List<Servico>> getAll() {
 		return ResponseEntity.ok(servicoRepository.findAll());
+	}
+
+	@PostMapping
+	public ResponseEntity<Servico> Post(@RequestBody Servico servico) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(servicoRepository.save(servico));
 	}
 
 }
