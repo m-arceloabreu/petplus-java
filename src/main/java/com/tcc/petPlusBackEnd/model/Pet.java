@@ -27,7 +27,10 @@ public class Pet {
 	int idade;
 	
 	@NotNull
-	String tipo;
+	String especie;
+	
+	@NotNull
+	String porte;
 	
 	@NotNull
 	String raca;
@@ -60,14 +63,6 @@ public class Pet {
 		this.idade = idade;
 	}
 
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
 	public String getRaca() {
 		return raca;
 	}
@@ -84,6 +79,23 @@ public class Pet {
 		this.clientePet = clientePet;
 	}
 
+	public String getEspecie() {
+		return especie;
+	}
+
+	public void setEspecie(String especie) {
+		this.especie = especie;
+	}
+
+	public String getPorte() {
+		return porte;
+	}
+
+	public void setPorte(String porte) {
+		this.porte = porte;
+	}
+
+	
 	
 	
 	

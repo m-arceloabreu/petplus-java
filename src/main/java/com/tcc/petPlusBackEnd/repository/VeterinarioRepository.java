@@ -9,4 +9,5 @@ import com.tcc.petPlusBackEnd.model.Veterinario;
 
 public interface VeterinarioRepository extends JpaRepository<Veterinario, Long>{
 	public List<Veterinario> findByNome (String nome);
+	public Optional<Veterinario> findOneByNome (String nome);
 }

@@ -8,24 +8,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.tcc.petPlusBackEnd.model.Cliente;
 import com.tcc.petPlusBackEnd.model.Veterinario;
-import com.tcc.petPlusBackEnd.repository.ClienteRepository;
 import com.tcc.petPlusBackEnd.repository.VeterinarioRepository;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class VetDetailsServiceImpl implements UserDetailsService{
 	
 	@Autowired
-	private ClienteRepository userRepository;
-	
+	private VeterinarioRepository vetRepository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		Optional<Cliente> user = userRepository.findByNome(userName);
+		Optional<Veterinario> user = vetRepository.findOneByNome(userName);
 		user.orElseThrow(() -> new UsernameNotFoundException(userName+ "not found"));
-		return user.map(UserDetailsImpl::new).get();
+		return user.map(VetDetailsImpl::new).get();
 	}
-	
-
 }

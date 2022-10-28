@@ -7,14 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tcc.petPlusBackEnd.model.Clinica;
+import com.tcc.petPlusBackEnd.model.Servico;
 import com.tcc.petPlusBackEnd.repository.ClinicaRepository;
+import com.tcc.petPlusBackEnd.repository.ServicoRepository;
 
 @Controller
 @RequestMapping("/clinica")
@@ -22,6 +26,9 @@ import com.tcc.petPlusBackEnd.repository.ClinicaRepository;
 public class ClinicaController {
 	@Autowired
 	ClinicaRepository clinicaRepository;
+	
+	@Autowired
+	ServicoRepository servicoRepository;
 	
 	@GetMapping
 	public ResponseEntity<List<Clinica>> getAll(){
@@ -33,13 +40,28 @@ public class ClinicaController {
 		return ResponseEntity.ok(clinicaRepository.findByNome(nome));
 	}
 	
+	@GetMapping("/servico/{clinicaID}")
+	public ResponseEntity<List<Servico>> getServiceByClinica(@PathVariable long clinicaID){
+		return ResponseEntity.ok(servicoRepository.findByClinicaID(clinicaID));
+	}
+	
 	@GetMapping("/endereco/{logradouro}")
 	public ResponseEntity<List<Clinica>> getByLogradouro(@PathVariable String logradouro){
 		return ResponseEntity.ok(clinicaRepository.findByLogradouro(logradouro));
 	}
 	
 	@PostMapping
-    public ResponseEntity<Clinica > Post(@RequestBody Clinica clinica){
+    public ResponseEntity<Clinica> Post(@RequestBody Clinica clinica){
         return ResponseEntity.status(HttpStatus.CREATED).body(clinicaRepository.save(clinica));
     }
+	
+	@PutMapping
+	public  ResponseEntity<Clinica> put(@RequestBody Clinica clinica){
+		return ResponseEntity.status(HttpStatus.OK).body(clinicaRepository.save(clinica));
+	}
+	
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable long id){
+		clinicaRepository.deleteById(id);
+	}
 }

@@ -29,13 +29,11 @@ public class Agenda {
 	private Cliente clienteAgenda;
 	
 	@ManyToOne
-	@JoinColumn(name="idVeterinario", nullable=false)
-	private Veterinario veterinarioAgenda;
+	@JoinColumn(name="idClinica", nullable=false)
+	private Clinica clinicaAgenda;
 	
-	/*
-	 * @ManyToOne private Servico servico;
-	 */
-
+	private long petID;
+	
 	public long getIdAgenda() {
 		return idAgenda;
 	}
@@ -60,12 +58,20 @@ public class Agenda {
 		this.clienteAgenda = clienteAgenda;
 	}
 
-	public Veterinario getVeterinarioAgenda() {
-		return veterinarioAgenda;
+	public Clinica getClinicaAgenda() {
+		return clinicaAgenda;
 	}
 
-	public void setVeterinarioAgenda(Veterinario veterinarioAgenda) {
-		this.veterinarioAgenda = veterinarioAgenda;
+	public void setClinicaAgenda(Clinica clinicaAgenda) {
+		this.clinicaAgenda = clinicaAgenda;
+	}
+
+	public long getPetID() {
+		return petID;
+	}
+
+	public void setPetID(long petID) {
+		this.petID = petID;
 	}
 	
 	

@@ -44,10 +44,14 @@ public class Cliente {
 	@NotNull
 	private String telefone;
 	
+	private String tipo;
+	
 	@Size(max = 5000, message = "The picture link can't be bigger than 5000 chars")
-	private String picture;
+	private String imagem;
 	
 	private String logradouro;
+	
+	private int numero;
 	
 	private String bairro;
 	
@@ -58,21 +62,8 @@ public class Cliente {
 	@OneToMany(mappedBy = "clientePet", cascade = CascadeType.ALL)
 	private List<Pet> pet;
 	
-	@ManyToMany
-	@JoinTable(
-		name = "Cliente_Servico",
-		joinColumns = @JoinColumn(name = "idCliente"),
-		inverseJoinColumns = @JoinColumn(name = "idServico")
-	)
-	private List<Servico> servicoCliente;
-
-	public List<Servico> getServicoCliente() {
-		return servicoCliente;
-	}
-
-	public void setServicoCliente(List<Servico> servicoCliente) {
-		this.servicoCliente = servicoCliente;
-	}
+	@OneToMany(mappedBy = "clienteAgenda", cascade = CascadeType.ALL)
+	private List<Agenda> agenda;
 
 	public long getIdClient() {
 		return idClient;
@@ -122,12 +113,12 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 
-	public String getPicture() {
-		return picture;
+	public String getImagem() {
+		return imagem;
 	}
 
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 	public String getLogradouro() {
@@ -169,6 +160,23 @@ public class Cliente {
 	public void setPet(List<Pet> pet) {
 		this.pet = pet;
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+	
 	
 	
 }

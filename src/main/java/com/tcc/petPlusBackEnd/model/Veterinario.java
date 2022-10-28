@@ -47,6 +47,13 @@ public class Veterinario {
 	@Column(name = "logradouro")
 	private String logradouro;
 	
+	private int numero;
+	
+	private String tipo;
+	
+	@Size(max = 5000, message = "The picture link can't be bigger than 5000 chars")
+	private String imagem;
+	
 	@NotNull
 	private String bairro;
 	
@@ -64,13 +71,6 @@ public class Veterinario {
 		this.clinicaVeterinario = clinicaVeterinario;
 	}
 
-	public List<Servico> getServicoVeterinario() {
-		return servicoVeterinario;
-	}
-
-	public void setServicoVeterinario(List<Servico> servicoVeterinario) {
-		this.servicoVeterinario = servicoVeterinario;
-	}
 
 	@NotNull
 	private int crmv;
@@ -83,15 +83,7 @@ public class Veterinario {
 	)
 	private List<Clinica> clinicaVeterinario;
 	
-	
-	@ManyToMany  
-	@JoinTable( 
-		name = "Veterinario_Servico", 
-		joinColumns = @JoinColumn(name ="idVeterinario"), 
-		inverseJoinColumns = @JoinColumn(name = "idServico") 
-	)
-	private List<Servico> servicoVeterinario;
-	 
+
 
 	public long getIdVeterinario() {
 		return idVeterinario;
@@ -187,6 +179,30 @@ public class Veterinario {
 
 	public void setCrmv(int crmv) {
 		this.crmv = crmv;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 	
 	

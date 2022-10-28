@@ -5,24 +5,22 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.tcc.petPlusBackEnd.model.Cliente;
-import com.tcc.petPlusBackEnd.model.ClienteLogin;
 import com.tcc.petPlusBackEnd.model.Veterinario;
 
-public class UserDetailsImpl implements UserDetails{
-	
-	private static final long serialVersionUID = 1L;
+
+public class VetDetailsImpl implements UserDetails{
+private static final long serialVersionUID = 1L;
 	
 	private String userName;
 	private String password;
 	
-	public UserDetailsImpl(Cliente user) {
+	public VetDetailsImpl(Veterinario user) {
 		this.userName = user.getNome();
 		this.password = user.getSenha();
 	}
 	
 	
-	public UserDetailsImpl() {}
+	public VetDetailsImpl() {}
 	
 	
 	
@@ -67,5 +65,4 @@ public class UserDetailsImpl implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-
 }

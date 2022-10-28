@@ -21,26 +21,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Servico {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long idServico;
+	private long idServico;
 	
 	@NotNull
 	String tipoServico;
 	
-	@ManyToMany(mappedBy = "servicoCliente")
-	private List<Cliente> cliente;
+	@NotNull
+	Double valor;
 	
 	@ManyToOne
-	@JoinColumn(name="idProduto", nullable=false)
-	private Produto produtoServico;
-	
-	@ManyToMany(mappedBy = "servicoVeterinario")
-	private List<Veterinario> veterinarioServico;
+	@JoinColumn(name="idClinica", nullable=false)
+	private Clinica clinicaServico;
 
-	public Long getIdServico() {
+	public long getIdServico() {
 		return idServico;
 	}
 
-	public void setIdServico(Long idServico) {
+	public void setIdServico(long idServico) {
 		this.idServico = idServico;
 	}
 
@@ -52,28 +49,20 @@ public class Servico {
 		this.tipoServico = tipoServico;
 	}
 
-	public List<Cliente> getCliente() {
-		return cliente;
+	public Double getValor() {
+		return valor;
 	}
 
-	public void setCliente(List<Cliente> cliente) {
-		this.cliente = cliente;
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 
-	public Produto getProdutoServico() {
-		return produtoServico;
+	public Clinica getClinicaServico() {
+		return clinicaServico;
 	}
 
-	public void setProdutoServico(Produto produtoServico) {
-		this.produtoServico = produtoServico;
-	}
-
-	public List<Veterinario> getVeterinarioServico() {
-		return veterinarioServico;
-	}
-
-	public void setVeterinarioServico(List<Veterinario> veterinarioServico) {
-		this.veterinarioServico = veterinarioServico;
+	public void setClinicaServico(Clinica clinicaServico) {
+		this.clinicaServico = clinicaServico;
 	}
 	
 	
