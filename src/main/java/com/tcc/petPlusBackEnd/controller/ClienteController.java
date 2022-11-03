@@ -46,11 +46,6 @@ public class ClienteController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Cliente> Put(@RequestBody Cliente cliente){
-		return ResponseEntity.ok(repositorio.save(cliente));
-	}
-	
-	@PutMapping
 	public  ResponseEntity<Cliente> put(@RequestBody Cliente cliente){
 		return ResponseEntity.status(HttpStatus.OK).body(repositorio.save(cliente));
 	}

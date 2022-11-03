@@ -34,6 +34,8 @@ public class Agenda {
 	
 	private long petID;
 	
+	private long servicoID;
+	
 	public long getIdAgenda() {
 		return idAgenda;
 	}
@@ -72,6 +74,14 @@ public class Agenda {
 
 	public void setPetID(long petID) {
 		this.petID = petID;
+	}
+
+	public long getServicoID() {
+		return servicoID;
+	}
+
+	public void setServicoID(long servicoID) {
+		this.servicoID = servicoID;
 	}
 	
 	

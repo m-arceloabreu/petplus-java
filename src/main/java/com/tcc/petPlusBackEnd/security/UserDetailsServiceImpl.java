@@ -9,9 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.tcc.petPlusBackEnd.model.Cliente;
-import com.tcc.petPlusBackEnd.model.Veterinario;
 import com.tcc.petPlusBackEnd.repository.ClienteRepository;
-import com.tcc.petPlusBackEnd.repository.VeterinarioRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{

@@ -27,8 +27,9 @@ public class ClinicaController {
 	@Autowired
 	ClinicaRepository clinicaRepository;
 	
-	@Autowired
-	ServicoRepository servicoRepository;
+	/*
+	 * @Autowired ServicoRepository servicoRepository;
+	 */
 	
 	@GetMapping
 	public ResponseEntity<List<Clinica>> getAll(){
@@ -40,10 +41,11 @@ public class ClinicaController {
 		return ResponseEntity.ok(clinicaRepository.findByNome(nome));
 	}
 	
-	@GetMapping("/servico/{clinicaID}")
-	public ResponseEntity<List<Servico>> getServiceByClinica(@PathVariable long clinicaID){
-		return ResponseEntity.ok(servicoRepository.findByClinicaID(clinicaID));
-	}
+	/*
+	 * @GetMapping("/servico/{clinicaID}") public ResponseEntity<List<Servico>>
+	 * getServiceByClinica(@PathVariable long clinicaID){ return
+	 * ResponseEntity.ok(servicoRepository.findByClinicaID(clinicaID)); }
+	 */
 	
 	@GetMapping("/endereco/{logradouro}")
 	public ResponseEntity<List<Clinica>> getByLogradouro(@PathVariable String logradouro){

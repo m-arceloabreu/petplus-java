@@ -6,11 +6,13 @@ import java.util.Optional;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.tcc.petPlusBackEnd.model.Veterinario;
 import com.tcc.petPlusBackEnd.model.VeterinarioLogin;
 import com.tcc.petPlusBackEnd.repository.VeterinarioRepository;
 
+@Service
 public class VeterinarioService {
 	@Autowired
 	private VeterinarioRepository vetRepository;
