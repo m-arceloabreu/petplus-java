@@ -26,44 +26,42 @@ import com.tcc.petPlusBackEnd.repository.ServicoRepository;
 public class ClinicaController {
 	@Autowired
 	ClinicaRepository clinicaRepository;
-	
-	/*
-	 * @Autowired ServicoRepository servicoRepository;
-	 */
-	
+
+	@Autowired
+	ServicoRepository servicoRepository;
+
 	@GetMapping
-	public ResponseEntity<List<Clinica>> getAll(){
+	public ResponseEntity<List<Clinica>> getAll() {
 		return ResponseEntity.ok(clinicaRepository.findAll());
 	}
-	
+
 	@GetMapping("/{nome}")
-	public ResponseEntity<List<Clinica>> getByNome(@PathVariable String nome){
+	public ResponseEntity<List<Clinica>> getByNome(@PathVariable String nome) {
 		return ResponseEntity.ok(clinicaRepository.findByNome(nome));
 	}
-	
-	/*
-	 * @GetMapping("/servico/{clinicaID}") public ResponseEntity<List<Servico>>
-	 * getServiceByClinica(@PathVariable long clinicaID){ return
-	 * ResponseEntity.ok(servicoRepository.findByClinicaID(clinicaID)); }
-	 */
-	
+
+	@GetMapping("/servico/{clinicaID}")
+	public ResponseEntity<List<Servico>> getServiceByClinica(@PathVariable long clinicaID) {
+		return ResponseEntity.ok(servicoRepository.findByclinicaServico(clinicaID));
+	}
+
 	@GetMapping("/endereco/{logradouro}")
-	public ResponseEntity<List<Clinica>> getByLogradouro(@PathVariable String logradouro){
+	public ResponseEntity<List<Clinica>> getByLogradouro(@PathVariable String logradouro) {
 		return ResponseEntity.ok(clinicaRepository.findByLogradouro(logradouro));
 	}
-	
+
 	@PostMapping
-    public ResponseEntity<Clinica> Post(@RequestBody Clinica clinica){
-        return ResponseEntity.status(HttpStatus.CREATED).body(clinicaRepository.save(clinica));
-    }
-	
+	public ResponseEntity<Clinica> Post(@RequestBody Clinica clinica) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(clinicaRepository.save(clinica));
+	}
+
 	@PutMapping
-	public  ResponseEntity<Clinica> put(@RequestBody Clinica clinica){
+	public ResponseEntity<Clinica> put(@RequestBody Clinica clinica) {
 		return ResponseEntity.status(HttpStatus.OK).body(clinicaRepository.save(clinica));
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable long id){
+	public void delete(@PathVariable long id) {
 		clinicaRepository.deleteById(id);
 	}
 }
