@@ -12,18 +12,19 @@ import com.tcc.petPlusBackEnd.model.Cliente;
 import com.tcc.petPlusBackEnd.repository.ClienteRepository;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl /* implements UserDetailsService */{
 	
 	@Autowired
 	private ClienteRepository userRepository;
 	
 	
-	@Override
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		Optional<Cliente> user = userRepository.findByNome(userName);
-		user.orElseThrow(() -> new UsernameNotFoundException(userName+ "not found"));
-		return user.map(UserDetailsImpl::new).get();
-	}
+	/*
+	 * @Override public UserDetails loadUserByUsername(String userName) throws
+	 * UsernameNotFoundException { Optional<Cliente> user =
+	 * userRepository.findByNome(userName); user.orElseThrow(() -> new
+	 * UsernameNotFoundException(userName+ "not found")); return
+	 * user.map(UserDetailsImpl::new).get(); }
+	 */
 	
 
 }
