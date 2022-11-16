@@ -15,7 +15,7 @@ private static final long serialVersionUID = 1L;
 	private String password;
 	
 	public VetDetailsImpl(Veterinario user) {
-		this.userName = user.getNome();
+		this.userName = user.getEmail();
 		this.password = user.getSenha();
 	}
 	

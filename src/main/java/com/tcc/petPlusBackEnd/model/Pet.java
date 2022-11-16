@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -36,7 +37,7 @@ public class Pet {
 	String raca;
 	
 	@ManyToOne
-	@JoinColumn(name="idClient", nullable=false)
+	@JsonIgnoreProperties({"senha", "email", "pet"})
 	private Cliente clientePet;
 
 	public long getIdPet() {

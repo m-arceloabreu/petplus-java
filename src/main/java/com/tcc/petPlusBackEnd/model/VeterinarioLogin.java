@@ -1,21 +1,37 @@
 package com.tcc.petPlusBackEnd.model;
 
 public class VeterinarioLogin {
+	private long idVeterinario;
 	private String nome;
-	private String usuario;
+	private String email;
 	private String senha;
+	private String imagem;
 	private String token;
+	
+	
+	public long getIdVeterinario() {
+		return idVeterinario;
+	}
+	public void setIdVeterinario(long idVeterinario) {
+		this.idVeterinario = idVeterinario;
+	}
 	public String getNome() {
 		return nome;
+	}
+	public String getImagem() {
+		return imagem;
+	}
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getUsuario() {
-		return usuario;
+	public String getEmail() {
+		return email;
 	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getSenha() {
 		return senha;
@@ -29,4 +45,7 @@ public class VeterinarioLogin {
 	public void setToken(String token) {
 		this.token = token;
 	}
+	
+	
+
 }

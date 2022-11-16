@@ -59,10 +59,12 @@ public class Cliente {
 	
 	private String uf;
 	
-	@OneToMany(mappedBy = "clientePet", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "clientePet", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties({"clientePet"})
 	private List<Pet> pet;
 	
-	@OneToMany(mappedBy = "clienteAgenda", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "clienteAgenda", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties({"clienteAgenda"})
 	private List<Agenda> agenda;
 
 	public long getIdClient() {

@@ -1,6 +1,7 @@
 package com.tcc.petPlusBackEnd.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
 
 import com.tcc.petPlusBackEnd.model.Servico;
+import com.tcc.petPlusBackEnd.model.Veterinario;
 import com.tcc.petPlusBackEnd.repository.ServicoRepository;
 
 @Controller
@@ -29,7 +31,11 @@ public class ServicoController {
 	public ResponseEntity<List<Servico>> getAll() {
 		return ResponseEntity.ok(servicoRepository.findAll());
 	}
-
+	@GetMapping("/id/{idServico}")
+	public ResponseEntity<Optional<Servico>> getById(@PathVariable Long idServico) {
+		return ResponseEntity.ok(servicoRepository.findById(idServico));
+	}
+	
 	@PostMapping
 	public ResponseEntity<Servico> Post(@RequestBody Servico servico) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(servicoRepository.save(servico));

@@ -9,11 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="tb_clinica")
@@ -29,9 +32,6 @@ public class Clinica {
 	@Email(message = "O atributo Usuario deve ser um email válido")
 	private String email;
 	
-	@NotNull
-	@Size(min = 5)
-	private String senha;
 	
 	@NotNull
 	private String telefone;
@@ -41,27 +41,30 @@ public class Clinica {
 	
 	private int numero;
 	
-	private String tipo;
+
 	
 	@Size(max = 5000, message = "The picture link can't be bigger than 5000 chars")
 	private String imagem;
 	
-	@NotNull
-	private String bairro;
 	
-	@NotNull
+	private String bairro;
+
 	private String cidade;
 	
-	@NotNull
+
 	private String uf;
 	
-	@OneToMany(mappedBy = "clinicaServico", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "clinicaServico", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties({"clinicaServico"})
 	private List<Servico> servicoClinica;
 	
-	@ManyToMany(mappedBy = "clinicaVeterinario") 
-	private List<Veterinario> veterinario;
+	@ManyToOne
+	@JsonIgnoreProperties ({"senha","email","clinicaVeterinario"})
+	private Veterinario veterinario;
 	
-	@OneToMany(mappedBy = "clinicaAgenda", cascade = CascadeType.ALL)
+	
+	@OneToMany(mappedBy = "clinicaAgenda", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties({"clinicaAgenda"})
 	private List<Agenda> agenda;
 	  
 	public long getIdClinica() {
@@ -88,13 +91,6 @@ public class Clinica {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 
 	public String getTelefone() {
 		return telefone;
@@ -136,11 +132,13 @@ public class Clinica {
 		this.uf = uf;
 	}
 
-	public List<Veterinario> getVeterinario() {
+	
+
+	public Veterinario getVeterinario() {
 		return veterinario;
 	}
 
-	public void setVeterinario(List<Veterinario> veterinario) {
+	public void setVeterinario(Veterinario veterinario) {
 		this.veterinario = veterinario;
 	}
 
@@ -160,13 +158,6 @@ public class Clinica {
 		this.numero = numero;
 	}
 
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
 
 	public String getImagem() {
 		return imagem;

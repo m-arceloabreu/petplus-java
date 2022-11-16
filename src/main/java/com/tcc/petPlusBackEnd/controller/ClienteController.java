@@ -16,13 +16,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.tcc.petPlusBackEnd.model.Cliente;
 import com.tcc.petPlusBackEnd.model.ClienteLogin;
+import com.tcc.petPlusBackEnd.model.Veterinario;
 import com.tcc.petPlusBackEnd.service.ClienteService;
 import com.tcc.petPlusBackEnd.repository.ClienteRepository;
 
-@Controller
+@RestController
 @RequestMapping("/cliente")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ClienteController {
@@ -43,6 +45,10 @@ public class ClienteController {
 	public ResponseEntity<Cliente> Post(@RequestBody Cliente cliente){
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(usuarioService.cadastrarCliente(cliente));
+	}
+	@GetMapping("/id/{idCliente}")
+	public ResponseEntity<Optional<Cliente>> getById(@PathVariable Long idCliente) {
+		return ResponseEntity.ok(repositorio.findById(idCliente));
 	}
 	
 	@PutMapping

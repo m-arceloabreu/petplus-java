@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tcc.petPlusBackEnd.model.Clinica;
 import com.tcc.petPlusBackEnd.model.Servico;
+import com.tcc.petPlusBackEnd.model.Veterinario;
 import com.tcc.petPlusBackEnd.repository.ClinicaRepository;
 import com.tcc.petPlusBackEnd.repository.ServicoRepository;
 
@@ -44,12 +45,17 @@ public class ClinicaController {
 	public ResponseEntity<List<Servico>> getServiceByClinica(@PathVariable long clinicaID) {
 		return ResponseEntity.ok(servicoRepository.findByclinicaServico(clinicaID));
 	}
+	
 
 	@GetMapping("/endereco/{logradouro}")
 	public ResponseEntity<List<Clinica>> getByLogradouro(@PathVariable String logradouro) {
 		return ResponseEntity.ok(clinicaRepository.findByLogradouro(logradouro));
 	}
 
+	@GetMapping("/id/{idClinica}")
+	public ResponseEntity<Clinica> getById(@PathVariable Long idClinica) {
+		return clinicaRepository.findById(idClinica).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
+	}
 	@PostMapping
 	public ResponseEntity<Clinica> Post(@RequestBody Clinica clinica) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(clinicaRepository.save(clinica));

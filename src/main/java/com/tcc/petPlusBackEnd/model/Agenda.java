@@ -13,6 +13,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name ="tb_agenda")
 public class Agenda {
@@ -25,16 +27,18 @@ public class Agenda {
 	private Date horario  = new java.sql.Date(System.currentTimeMillis());
 	
 	@ManyToOne
-	@JoinColumn(name="idClient", nullable=false)
+	@JsonIgnoreProperties({"email","senha","agenda"})
 	private Cliente clienteAgenda;
 	
 	@ManyToOne
-	@JoinColumn(name="idClinica", nullable=false)
+	@JsonIgnoreProperties({"agenda"})
 	private Clinica clinicaAgenda;
 	
-	private long petID;
+	private Long petID;
 	
-	private long servicoID;
+	private Long servicoID;
+	
+	
 	
 	public long getIdAgenda() {
 		return idAgenda;

@@ -10,10 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="tb_veterinario")
@@ -29,7 +34,7 @@ public class Veterinario {
 	@NotNull
 	private String cpf;
 	
-	@NotNull
+	
 	private String rg;
 	
 	@NotNull
@@ -40,7 +45,7 @@ public class Veterinario {
 	@Size(min = 5)
 	private String senha;
 	
-	@NotNull
+	
 	private String telefone;
 	
 	
@@ -54,14 +59,18 @@ public class Veterinario {
 	@Size(max = 5000, message = "The picture link can't be bigger than 5000 chars")
 	private String imagem;
 	
-	@NotNull
+	
 	private String bairro;
 	
-	@NotNull
+	
 	private String cidade;
 	
-	@NotNull
+	
 	private String uf;
+	
+	@OneToMany(mappedBy = "veterinario", cascade = javax.persistence.CascadeType.REMOVE)
+	@JsonIgnoreProperties({"veterinario"})
+	private List<Clinica> clinicaVeterinario;
 	
 	public List<Clinica> getClinicaVeterinario() {
 		return clinicaVeterinario;
@@ -72,17 +81,10 @@ public class Veterinario {
 	}
 
 
-	@NotNull
+	
 	private int crmv;
 	
-	@ManyToMany
-	@JoinTable(
-		name = "Veterinario_Clinica", 
-		joinColumns = @JoinColumn(name ="idVeterinario"), 
-		inverseJoinColumns = @JoinColumn(name = "idClinica") 
-	)
-	private List<Clinica> clinicaVeterinario;
-	
+
 
 
 	public long getIdVeterinario() {

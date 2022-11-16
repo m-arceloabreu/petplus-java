@@ -30,7 +30,7 @@ public class Servico {
 	Double valor;
 	
 	@ManyToOne
-	@JoinColumn(name="idClinica", nullable=false)
+	@JsonIgnoreProperties({"servicoClinica","veterinario"})
 	private Clinica clinicaServico;
 
 	public long getIdServico() {
